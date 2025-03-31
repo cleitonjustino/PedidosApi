@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedidosApi.Api", "PedidosApi.Api\PedidosApi.Api.csproj", "{1591CFAD-B806-416D-B7B9-E44242E88261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedidosApi.Domain", "PedidosApi.Domain\PedidosApi.Domain.csproj", "{EB893CC6-3A1E-4574-92DA-69C1DF90563B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedidosApi.Infrastructure", "PedidosApi.Infrastructure\PedidosApi.Infrastructure.csproj", "{96BDC0E1-99B1-4889-8D48-CD52DEDD4E70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedidosApi.Application", "PedidosApi.Application\PedidosApi.Application.csproj", "{BEEF4676-FA71-40FC-9A46-78322682D4F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1591CFAD-B806-416D-B7B9-E44242E88261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1591CFAD-B806-416D-B7B9-E44242E88261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1591CFAD-B806-416D-B7B9-E44242E88261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1591CFAD-B806-416D-B7B9-E44242E88261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB893CC6-3A1E-4574-92DA-69C1DF90563B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB893CC6-3A1E-4574-92DA-69C1DF90563B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB893CC6-3A1E-4574-92DA-69C1DF90563B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB893CC6-3A1E-4574-92DA-69C1DF90563B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96BDC0E1-99B1-4889-8D48-CD52DEDD4E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96BDC0E1-99B1-4889-8D48-CD52DEDD4E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96BDC0E1-99B1-4889-8D48-CD52DEDD4E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96BDC0E1-99B1-4889-8D48-CD52DEDD4E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEEF4676-FA71-40FC-9A46-78322682D4F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEEF4676-FA71-40FC-9A46-78322682D4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEEF4676-FA71-40FC-9A46-78322682D4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEEF4676-FA71-40FC-9A46-78322682D4F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
