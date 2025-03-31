@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="ConfigCat.Client" Version="9.3.2" />
+    </ItemGroup>
+
 </Project>
