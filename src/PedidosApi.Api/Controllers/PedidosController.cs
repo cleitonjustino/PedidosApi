@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using PedidosApi.Application.DTOs;
 using PedidosApi.Application.Features;
+using PedidosApi.Application.Validators;
 
 namespace PedidosApi.Controllers;
 
@@ -24,6 +26,14 @@ public class PedidosController : ControllerBase
     {
         try
         {
+            var validator = new PedidoRequestValidator();
+            var result = await validator.ValidateAsync(pedidoDTO);
+
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);  // Lança uma exceção de validação caso não seja válida
+            }
+
             _logger.LogInformation("Recebido novo pedido: {PedidoId}", pedidoDTO.PedidoId);
             var resultado = await _pedidoFeature.CriarPedidoAsync(pedidoDTO);
             return CreatedAtAction(nameof(ObterPedido), new { id = resultado.Id }, resultado);
@@ -32,12 +42,6 @@ public class PedidosController : ControllerBase
         {
             _logger.LogWarning(ex, "Tentativa de criar pedido duplicado: {PedidoId}", pedidoDTO.PedidoId);
             return BadRequest(new { erro = "Pedido duplicado", mensagem = ex.Message });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Erro ao criar pedido: {PedidoId}", pedidoDTO.PedidoId);
-            return StatusCode(StatusCodes.Status500InternalServerError,
-                new { erro = "Erro interno", mensagem = "Ocorreu um erro ao processar o pedido" });
         }
     }
 
