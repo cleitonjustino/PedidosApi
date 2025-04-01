@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="ConfigCat.Client" Version="9.3.2" />
+    <PackageReference Include="MassTransit" Version="8.4.1-develop.2253" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.4.1-develop.2253" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.3" />

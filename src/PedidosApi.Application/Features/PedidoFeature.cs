@@ -1,16 +1,20 @@
-﻿using PedidosApi.Application.DTOs;
+﻿using Microsoft.Extensions.Logging;
+using PedidosApi.Application.DTOs;
 using PedidosApi.Application.Mappers;
+using PedidosApi.Domain.Interfaces;
 using PedidosApi.Domain.Services;
 
 namespace PedidosApi.Application.Features;
 
 public class PedidoFeature : IPedidoFeature
 {
-    private readonly PedidoService _pedidoService;
-
-    public PedidoFeature(PedidoService pedidoService)
+    private readonly IPedidoService _pedidoService;
+    private readonly ILogger<PedidoFeature> _logger;
+    
+    public PedidoFeature(IPedidoService pedidoService, ILogger<PedidoFeature> logger)
     {
         _pedidoService = pedidoService;
+        _logger = logger;
     }
 
     public async Task<PedidoResponseDTO> CriarPedidoAsync(PedidoRequestDTO pedidoDTO)
@@ -32,7 +36,7 @@ public class PedidoFeature : IPedidoFeature
         }
         catch (Exception ex)
         {
-            // Logging seria feito aqui
+            _logger.LogError(ex, "Erro ao criar pedido: {PedidoId}", pedidoDTO.PedidoId);
             throw;
         }
     }

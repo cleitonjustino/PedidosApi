@@ -8,7 +8,7 @@ public class PedidoService(IPedidoRepository pedidoRepository,
     IIntegracaoPedidoService integracaoService,
     IFeatureFlagService featureFlagService) : IPedidoService
 {
-    private const string FEATURE_REFORMA_TRIBUTARIA = "ReformaTributaria";
+    private const string FEATURE_REFORMA_TRIBUTARIA = "reformatributaria";
 
     public async Task<Pedido?> CriarPedidoAsync(int pedidoId, int clienteId, List<Item> itens)
     {
