@@ -1,4 +1,5 @@
 using ConfigCat.Client;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using PedidosApi.Application.Features;
 using PedidosApi.Application.Validators;
@@ -8,7 +9,7 @@ using PedidosApi.Infrastructure.Data;
 using PedidosApi.Infrastructure.ExternalServices;
 using PedidosApi.Middleware;
 using Serilog;
-using Microsoft.OpenApi.Models;
+using PedidosApi.Infrastructure.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,12 +36,28 @@ builder.Services.AddSingleton<IConfigCatClient>(sp => ConfigCatClient.Get(config
 
 // Registro de serviços e repositories
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
-builder.Services.AddSingleton<IFeatureFlagService, FeatureFlagService>();
+builder.Services.AddScoped<IFeatureFlagService, FeatureFlagService>();
 builder.Services.AddScoped<IIntegracaoPedidoService, IntegracaoPedidoService>();
-builder.Services.AddScoped<PedidoService>();
-builder.Services.AddScoped<PedidoFeature>();
+builder.Services.AddScoped<IPedidoFeature, PedidoFeature>();
+builder.Services.AddScoped<IPedidoService, PedidoService>();
 
-
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<PedidoMessageConsumer>();
+    
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", 5672, "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+        cfg.ReceiveEndpoint("pedido-queue", e =>
+        {
+            e.ConfigureConsumer<PedidoMessageConsumer>(context);
+        });
+    });
+});
 
 // Registrar validadores
 builder.Services.AddScoped<PedidoRequestValidator>();
@@ -49,11 +66,9 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
-// app.UseHttpsRedirection();
-// app.UseCors("AllowSpecificOrigin");
 app.MapControllers();
 app.UseSwagger();
-app.UseSwagger(); // Ativa a geração do Swagger
+app.UseSwagger(); 
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pedidos API V1");
